@@ -20,7 +20,7 @@
 # definition file).
 #
 
-# Model Ids (E8 ALL variants)
+# Model Ids
 # 0PAJ10000 - China Mobile (Single SIM)
 # 0PAJ20000 - China Unicom (Dual SIM)
 # 0PAJ21000 - Bangladesh (Dual SIM)
@@ -28,19 +28,6 @@
 # 0PAJ31000 - Asia (Single SIM)
 # 0PAJ40000 - China Telecom (Dual SIM)
 # 0PAJ50000 - Sprint (Single SIM)
-
-# Model Ids (M8 Single SIM variants)
-# 0P6B10000 - International
-# 0P6B12000 - AT&T/Dev Edition
-# 0P6B13000 - T-Mobile
-# 0P6B16000 - Telus/Rogers (Canada)
-# 0P6B20000 - Verizon
-# 0P6B70000 - Sprint
-
-# Model Ids (M8 Dual SIM variants)
-# 0P6B41000 - Chinese CDMA version
-# 0P6B61000 - Chinese GSM version
-# 0P6B64000 - European GSM version
 
 BOARD_VENDOR := htc
 
@@ -66,15 +53,15 @@ BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02008000 --dt device/htc/e8/recovery/dt.img --tags_offset 0x01e00000
-BOARD_CUSTOM_BOOTIMG_MK := device/htc/e8/recovery/mkbootimg.mk
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02008000 --dt device/htc/e8/recovery/kernel/dt.img --tags_offset 0x01e00000
+BOARD_CUSTOM_BOOTIMG_MK := device/htc/e8/recovery/kernel/mkbootimg.mk
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 274464768
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 25165824
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2818572288
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 11676942336
-BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
+BOARD_FLASH_BLOCK_SIZE := 512
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
@@ -85,23 +72,23 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 BOARD_USES_MMCUTILS := true
-TARGET_PREBUILT_KERNEL := device/htc/e8/recovery/kernel
-TARGET_RECOVERY_INITRC := device/htc/e8/recovery/init.rc
+TARGET_PREBUILT_KERNEL := device/htc/e8/recovery/kernel/kernel
+TARGET_RECOVERY_INITRC := device/htc/e8/recovery/etc/init.rc
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 
 # TWRP Build Flags
 BOARD_RECOVERY_BLDRMSG_OFFSET := 2048
-TW_THEME := portrait_hdpi
+DEVICE_RESOLUTION := 1080x1920
 TW_INCLUDE_DUMLOCK := true
 TW_INCLUDE_CRYPTO := true
-TW_NO_EXFAT_FUSE := true
 TW_NO_SCREEN_BLANK := true
-
-# USB
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/msm_dwc3/f9200000.dwc3/gadget/lun%d/file
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_e8
+TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_LIBINIT_DEFINES_FILE := device/htc/e8/init/init_e8.c
+
+#Language Config
+TW_EXTRA_LANGUAGES := true 
+TW_DEFAULT_LANGUAGE := zh_CN
